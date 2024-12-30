@@ -6,7 +6,11 @@ import sendResponse from "../../../shared/sendResponse";
 
 
 const createCustomer = catchAsync(async (req: Request, res: Response) => {
-    const data = req.body;
+    let data = req.body;
+
+    if (req.user){
+        data = req.user
+    }
 
     const result = await authService.createUser(data);
 
@@ -25,26 +29,26 @@ const createCustomer = catchAsync(async (req: Request, res: Response) => {
 
 })
 
-const createCustomerWithGoogle = catchAsync(async (req: Request, res: Response) => {
-    const googleProfile = req.user;
-    const result = await authService.createUserWithGoogleSer(googleProfile);
-
-    res.cookie("token", result.token, {
-        // secure: config.env === "production",
-        httpOnly: true,
-        sameSite: "none",
-        maxAge: 1000 * 60 * 60 * 24 * 365,
-    });
-    sendResponse(res, {
-        statusCode: httpStatus.OK,
-        success: true,
-        message: "User information created successfully",
-        data: result,
-    });
-    res.send("Success")
-    // console.log(googleProfile)
-})
+// const createCustomerWithGoogle = catchAsync(async (req: Request, res: Response) => {
+//     const googleProfile = req.user;
+//     const result = await authService.createUser(googleProfile);
+//
+//     res.cookie("token", result.token, {
+//         // secure: config.env === "production",
+//         httpOnly: true,
+//         sameSite: "none",
+//         maxAge: 1000 * 60 * 60 * 24 * 365,
+//     });
+//     sendResponse(res, {
+//         statusCode: httpStatus.OK,
+//         success: true,
+//         message: "User information created successfully",
+//         data: result,
+//     });
+//     res.send("Success")
+//     // console.log(googleProfile)
+// })
 export const authController ={
     createCustomer,
-    createCustomerWithGoogle
+    // createCustomerWithGoogle
 }
