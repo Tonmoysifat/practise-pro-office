@@ -62,8 +62,22 @@ const createCustomerWithGoogle = catchAsync(async (req: Request, res: Response) 
     });
     res.send("Success")
 })
+
+const getAllVisitor = catchAsync(async (req: Request, res: Response) => {
+    const result = await authService.getAllVisitorsService();
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "User information created successfully",
+        data: result,
+    });
+
+})
+
 export const authController ={
     createCustomer,
     createCustomerWithGoogle,
-    loginCustomer
+    loginCustomer,
+    getAllVisitor
 }

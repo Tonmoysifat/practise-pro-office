@@ -25,7 +25,7 @@ const createUser = async (payload: { username: string, email: string, password: 
     const res = await prisma.$transaction(async (tcl) => {
         const hashedPassword = await bcrypt.hash(payload.password, 12)
         const user = await tcl.user.create({
-            data:{
+            data: {
                 username: payload.username,
                 email: payload.email,
                 role: UserRoles.VISITOR,
@@ -107,7 +107,7 @@ const createUserWithGoogleService = async (payload: {
             config.jwt.jwt_secret as Secret,
             config.jwt.expires_in as string
         )
-        return {"login":true,existingUser, token}
+        return {"login": true, existingUser, token}
 
     }
 
@@ -137,8 +137,18 @@ const createUserWithGoogleService = async (payload: {
     return res;
 }
 
+const getAllVisitorsService = async () => {
+    const visitors = await prisma.visitor.findMany({
+        include: {
+            user: true,
+        },
+    });
+
+    return visitors;
+};
 export const authService = {
     createUser,
     createUserWithGoogleService,
-    loginUser
+    loginUser,
+    getAllVisitorsService
 }

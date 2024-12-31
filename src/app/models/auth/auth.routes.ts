@@ -13,5 +13,7 @@ router.get(
     authController.createCustomerWithGoogle
 );
 
+router.get("/get-visitor", authController.getAllVisitor)
+
 export const customerRouter = router
 
