@@ -19,7 +19,12 @@ export default {
         client_secret: process.env.GOOGLE_CLIENT_SECRET,
         // redirect_uris: [process.env.GOOGLE_REDIRECT_URI],
         // scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
-    }
+    },
+    paypal: {
+        client_id: process.env.PAYPAL_CLIENT_ID,
+        client_secret: process.env.PAYPAL_CLIENT_SECRET,
+        mode: process.env.PAYPAL_MODE,
+    },
 
     // UPLOAD_PATH: process.env.UPLOAD_PATH,
     // CRON_JOBS: process.env.CRON_JOBS,

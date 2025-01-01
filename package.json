@@ -27,6 +27,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "@paypal/paypal-server-sdk": "^0.6.1",
     "@prisma/client": "^6.1.0",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",
